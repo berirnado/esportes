@@ -42,9 +42,20 @@ module.exports = {
         produto.nome = req.body.nome
         produto.valor = req.body.valor
         produto.tipo = req.body.tipo
-        produto.save();
+        await produto.save();
+        return res.render('admin/produto/list.ejs', {'Produtos': produtos, 'msg': req.flash('msg')})
     },
     async del(req,res) {
-
+        const id = req.params.id;
+        await Produto.destroy({where: {id:id}}).then(
+            (produto) => {
+                req.flash('msg', 'Produto deletado com sucesso');
+                res.redirect('/admin/produto/');
+            },
+            (err) => {
+                req.flash('msg', 'Problema ao alterar o produto');
+                res.redirect('/admin/produto/');
+            }
+        )
     },
 }

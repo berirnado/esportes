@@ -1,0 +1,143 @@
+<%- include('../cabecalho') -%>
+<main role="main">
+    <script>
+        $(document).ready(function () {
+            $("#query").keyup(function () {
+                //console.log("Aqui" + $(this).val())
+                //$("#query").css("background-color", "yellow");
+                $.ajax({
+                    url: '/api/find/',
+                    method: 'POST',
+                    data: { query: $(this).val() }
+                }).done((res)=>{
+                    if (res) {
+                        $("#produtos").html("");
+                        var produtos = res;
+                        console.log(produtos.length)
+                        for(var i=0;i<produtos.length;i++){
+                            $("#produtos").append("<option value='"+ produtos[i].id +"'>"+ produtos[i].nome +"</option>");
+                        }                          
+                        console.log('id from ajax call is', produtos);
+                    }else{
+                        console.log('error...ajax');
+                    }                
+                })
+            });
+        });
+
+        /*$(document).on('', '#delete-btn', function (event) {
+            event.preventDefault();
+            const id = $(this).attr('data-id');
+            $.ajax({
+                url: '/api/delete/' + id,
+                method: 'DELETE',
+                data: { id: id }
+            }).done(function (res) {
+                if (res.success) {
+                    console.log('id from ajax call is', res);
+                    window.location.reload();
+                } else {
+                    console.log('error...ajax');
+                }
+            });    */
+    </script>
+    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title h4" id="myExtraLargeModalLabel">Pesquisa produto.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <input list="produtos" type="text" class="form-control" id="query" name="query">
+                        <datalist id="produtos">
+                            
+                        </datalist>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+            $(document).ready(function () {
+                $("#produtoI").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    //console.log(value)
+                    $("#produtos option").filter(function () {
+                        //$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                        if ($(this).text().toLowerCase().indexOf(value) == 0) {
+                            $(this).attr('selected', 'selected');
+                        }
+                        if ($(this).text().toLowerCase().indexOf(value) == -1) {
+                            $(this).attr('disabled', 'true');
+                        }
+                    });
+                });
+            });
+
+    </script>
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="card bg-danger mb-3">
+                <div class="card-header text-white">Entrada</div>
+                <div class="card-body bg-white text-dark">
+                    <h5 class="card-title">Entrada de produtos</h5>
+                    <form method="GET">
+                        <div class="form-group">
+                            <label for="produtoI">Código do Produto</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="produtoI" aria-describedby="pesquisaProduto"
+                                    placeholder="Código do produto.">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" data-toggle="modal"
+                                        data-target=".bd-example-modal-xl"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                            <small id="pesquisaProduto" class="form-text text-muted">Nesse campo você deve colocar o
+                                código do produto ou pesquisar clicando em <i class="fas fa-search"></i>.</small>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="produtoI">Produto</label>
+                            <input type="text" disabled class="form-control" placeholder="Produto">
+                        </div>
+                        <div class="form-group">
+                            <label for="produtoI">QUantidade</label>
+                            <input type="number" class="form-control" placeholder="Quantidade">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 80px;">Entrada</button>
+
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-7">
+            <div class="card bg-danger mb-3 overflow-auto" style="height: 450px;">
+                <div class="card-header text-white">Entrada de produto</div>
+                <div class="card-body bg-white text-dark">
+                    <h5 class="card-title">Entradas do dia</h5>
+                    <table class="table">
+                        <thead class="thead-red">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Produto</th>
+                                <th scope="col">Quantidade</th>
+                                <th scope="col">Excluir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+    <%- include('../rodape') -%>

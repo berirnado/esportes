@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Carousel Template · Bootstrap</title>
+
+    <link href="/caixa/fontawesom/css/all.css" rel="stylesheet">
+    <!--load all styles -->
+    <!-- Bootstrap core CSS -->
+    <link href="/caixa/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href="/caixa/css/style.css" rel="stylesheet">
+    <script src="/caixa/js/jquery.min.js"></script>
+    <script src="/caixa/js/bootstrap.min.js"></script>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <%
+    function formatDate(date) {
+        var monthNames = [
+          "Janeiro", "Fevereiro", "Março",
+          "Abril", "Maio", "Junho", "Julho",
+          "Agosto", "Setembro", "Outubro",
+          "Novembro", "Dezembro"
+        ];      
+        var day = date.getUTCDate();
+        var monthIndex = date.getUTCMonth();
+        var year = date.getUTCFullYear();
+      
+        return day + ' de ' + monthNames[monthIndex] + ' de ' + year;
+      }
+      
+    %>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="#">Carousel</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/caixa">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/caixa/venda">Venda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/caixa/quadra">Quadra</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/caixa/entrada">Entrada</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/caixa/manutencao">Manutenção</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/caixa/quebra">Quebra</a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text" style="padding-right: 10px;">
+                        Caixa do dia: <%=formatDate(new Date(Caixa.data))%>
+                    </span>
+
+                    <a href="/caixa/fecha/<%=Caixa.id%>" class="btn btn-outline-success my-2 my-sm-0">Fechar Caixa</a>
+
+                </div>
+            </nav>
+        </header>

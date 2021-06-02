@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Sistema de caixa do Laranjeiras Futebol Clube</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/caixa/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link href="/caixa/css/style.css" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <%
+    function formatDate(date) {
+        var monthNames = [
+          "Janeiro", "Fevereiro", "Março",
+          "Abril", "Maio", "Junho", "Julho",
+          "Agosto", "Setembro", "Outubro",
+          "Novembro", "Dezembro"
+        ];      
+        var day = date.getDate();
+        var monthIndex = date.getMonth();
+        var year = date.getFullYear();
+      
+        return day + ' de ' + monthNames[monthIndex] + ' de ' + year;
+      }
+    %>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <a class="navbar-brand" href="#">Carousel</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Abrir caixa <span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text" style="padding-right: 10px;">
+                        Hoje é: <%=formatDate(new Date())%>
+                    </span>
+
+                    <button href="#" disabled class="btn btn-outline-success my-2 my-sm-0">Fechar Caixa</button>
+
+                </div>
+            </nav>
+        </header>
+        <main role="main">
+
+
+            <!-- Three columns of text below the carousel -->
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="card bg-danger mb-3">
+                        <div class="card-header text-white">Caixa</div>
+                        <div class="card-body bg-white text-dark">
+                            <h5 class="card-title">Abrir Caixa</h5>
+                            <form method="POST">
+                                <div class="form-group">
+                                    <label for="dataI">Data</label>
+                                    <input type="date" name="data" class="form-control" id="dataI"
+                                        aria-describedby="dataCaixa">
+                                    <small id="dataCaixa" class="form-text text-muted">Aqui você deve informar a data
+                                        relacionada ao caixa que deseja abrir.</small>
+                                </div>
+                                <input type="hidden" name="aberta" value="TRUE">
+                                <button type="submit" class="btn btn-primary" style="width: 80px;">Abrir</button>
+                                <% if(typeof msg !== "undefined"){ %>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="margin-top: 20px;">
+                                    <%=msg%>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <% } %>
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- /.col-lg-4 -->
+            </div><!-- /.row -->
+
+            <!-- FOOTER -->
+            <footer class="container">
+                <p class="float-right"><a href="#">Back to top</a></p>
+                <p>© 2017-2019 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+            </footer>
+        </main>
+    </div>
+    <script src="/caixa/js/jquery.min.js"></script>
+    <script src="/caixa/js/bootstrap.min.js"></script>
+</body>
+
+</html>
